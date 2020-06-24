@@ -1,12 +1,11 @@
-describe('drivers', function() {
+describe('drivers', function () {
   describe('updateDriverWithKeyAndValue(driver, key, value)', function () {
     beforeEach(function () {
-      for (const key in driver) {
-        delete driver[key];
-      }
-
-      driver.name = 'Sam';
     });
+
+    let driver = {
+      name: "Sam"
+    }
 
     it('returns a driver with the original key value pairs and the new key value pair', function () {
       expect(updateDriverWithKeyAndValue(driver, 'address', '11 Broadway')).to.eql({
@@ -14,6 +13,10 @@ describe('drivers', function() {
         address: '11 Broadway'
       });
     });
+
+    driver = {
+      name: "Sam"
+    }
 
     it('it does not modify the original driver, but rather returns a clone with the new data', function () {
       updateDriverWithKeyAndValue(driver, 'address', '11 Broadway');
@@ -23,6 +26,10 @@ describe('drivers', function() {
   });
 
   describe('destructivelyUpdateDriverWithKeyAndValue(driver, key, value)', function () {
+    driver = {
+      name: "Sam"
+    }
+
     it('updates `driver` with the given `key` and `value` (it is destructive) and returns the entire updated driver', function () {
       expect(destructivelyUpdateDriverWithKeyAndValue(driver, 'address', '12 Broadway')).to.eql({
         name: 'Sam',
@@ -37,12 +44,19 @@ describe('drivers', function() {
   });
 
   describe('deleteFromDriverByKey(driver, key)', function () {
+    driver = {
+      name: "Sam"
+    }
+
     it('deletes `key` from a clone of driver and returns the new driver (it is non-destructive)', function () {
       let newdriver = deleteFromDriverByKey(driver, 'name');
 
       expect(newdriver['name']).to.equal(undefined);
       expect(typeof newdriver).to.equal('object');
     });
+    driver = {
+      name: "Sam"
+    }
 
     it('does not modify the original driver (it is non-destructive)', function () {
       deleteFromDriverByKey(driver, 'name');
@@ -52,11 +66,18 @@ describe('drivers', function() {
   });
 
   describe('destructivelyDeleteFromDriverByKey(driver, key)', function () {
+    driver = {
+      name: "Sam"
+    }
+
     it('returns driver without the delete key/value pair', function () {
       let newdriver = destructivelyDeleteFromDriverByKey(driver, 'name');
 
       expect(newdriver['name']).to.equal(undefined);
     });
+    driver = {
+      name: "Sam"
+    }
 
     it('modifies the original driver', function () {
       let newdriver = destructivelyDeleteFromDriverByKey(driver, 'name');
